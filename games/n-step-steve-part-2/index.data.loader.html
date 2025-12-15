@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Loader</title>
+</head>
+<body>
+    <script>
+        async function loadAndCombineChunks() {
+            const chunkPromises = [
+                fetch('index.data.part000').then(response => response.arrayBuffer()),
+                fetch('index.data.part001').then(response => response.arrayBuffer()),
+            ];
+            
+            try {
+                const chunks = await Promise.all(chunkPromises);
+                const totalSize = chunks.reduce((sum, chunk) => sum + chunk.byteLength, 0);
+                const combinedBuffer = new Uint8Array(totalSize);
+                
+                let offset = 0;
+                for (const chunk of chunks) {
+                    combinedBuffer.set(new Uint8Array(chunk), offset);
+                    offset += chunk.byteLength;
+                }
+                
+                // Create blob and download
+                const blob = new Blob([combinedBuffer]);
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.data';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error loading chunks:', error);
+            }
+        }
+        
+        // Auto-load when page loads
+        window.addEventListener('DOMContentLoaded', loadAndCombineChunks);
+    </script>
+    <p>Loading large file... Please wait.</p>
+</body>
+</html>

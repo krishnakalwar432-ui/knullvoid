@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Loader</title>
+</head>
+<body>
+    <script>
+        async function loadAndCombineChunks() {
+            const chunkPromises = [
+                fetch('EaglercraftX_1.8_WASM-GC_Offline_Download.html.part000').then(response => response.arrayBuffer()),
+                fetch('EaglercraftX_1.8_WASM-GC_Offline_Download.html.part001').then(response => response.arrayBuffer()),
+                fetch('EaglercraftX_1.8_WASM-GC_Offline_Download.html.part002').then(response => response.arrayBuffer()),
+            ];
+            
+            try {
+                const chunks = await Promise.all(chunkPromises);
+                const totalSize = chunks.reduce((sum, chunk) => sum + chunk.byteLength, 0);
+                const combinedBuffer = new Uint8Array(totalSize);
+                
+                let offset = 0;
+                for (const chunk of chunks) {
+                    combinedBuffer.set(new Uint8Array(chunk), offset);
+                    offset += chunk.byteLength;
+                }
+                
+                // Create blob and download
+                const blob = new Blob([combinedBuffer]);
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'EaglercraftX_1.8_WASM-GC_Offline_Download.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error loading chunks:', error);
+            }
+        }
+        
+        // Auto-load when page loads
+        window.addEventListener('DOMContentLoaded', loadAndCombineChunks);
+    </script>
+    <p>Loading large file... Please wait.</p>
+</body>
+</html>

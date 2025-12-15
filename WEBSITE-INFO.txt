@@ -1,0 +1,57 @@
+KNULLVOID MULTIGAME WEBSITE
+==========================
+
+Website Status: READY FOR DEPLOYMENT
+Website Size: ~3.8GB
+Number of Games: 150+
+Hosting Requirements: Specialized hosting for large static sites
+
+FILES PREPARED:
+---------------
+- All game files organized in /games directory
+- Main index.html with game launcher
+- Custom CSS styling
+- JavaScript functionality
+- Config files for game management
+
+DEPLOYMENT INSTRUCTIONS:
+-----------------------
+
+1. DOUBLE-CLICK "DEPLOY-WEBSITE.bat" to get started
+   OR
+   RUN "python upload_website.py" in this directory
+
+2. CHOOSE your hosting provider:
+   - Cloudflare Pages (Recommended)
+   - Netlify (Alternative)
+
+3. UPLOAD your website by dragging the entire folder:
+   C:\Users\KRISHNA\Downloads\monkeygg2.github.io-main\monkeygg2.github.io-main
+
+4. WAIT for deployment to complete (10-15 minutes)
+
+5. GET your PUBLIC URL to share with others
+
+FEATURES OF YOUR WEBSITE:
+-------------------------
+- 150+ unblocked games
+- Customizable themes and colors
+- Game search functionality
+- Settings panel for customization
+- Keyboard shortcuts
+- Responsive design
+
+TECHNICAL DETAILS:
+------------------
+- Static HTML/CSS/JavaScript site
+- No server-side requirements
+- Works on any modern browser
+- Mobile-friendly interface
+
+ONCE DEPLOYED:
+--------------
+Your website will be accessible via a PUBLIC URL that looks like:
+- https://your-site.pages.dev (Cloudflare)
+- https://your-site.netlify.app (Netlify)
+
+Share this URL with friends, students, or anyone who should access your multigame website!
